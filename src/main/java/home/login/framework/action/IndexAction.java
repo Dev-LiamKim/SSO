@@ -12,8 +12,18 @@ import home.login.app.login.dao.LoginDao;
 @RequestMapping("/index")
 public class IndexAction extends ActionBase {
 
-    @GetMapping("/login")
-    public String loginForm(Model model) {
-        return "login";
+    @GetMapping("/main")
+    public String MainPage(Model model) {
+        return "index/main";
+    }
+
+    @GetMapping("/loginForm")
+    public String loginPage(Model model){
+        return "index/login";
+    }
+
+    @GetMapping("/registForm")
+    public String registerPage(Model model) {
+        return "index/regist    ";
     }
 }
