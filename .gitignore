@@ -1,0 +1,15 @@
+### VS Code ###
+.vscode/
+.gradle
+#각종db 및 비공개 소스
+*.properties
+
+#잡다한 소스들
+*gradle*
+!build.gradle
+
+*.sql
+
+bin/*
+build/*
+sqlResult/*
