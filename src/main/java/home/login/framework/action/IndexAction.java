@@ -24,6 +24,6 @@ public class IndexAction extends ActionBase {
 
     @GetMapping("/registForm")
     public String registerPage(Model model) {
-        return "index/regist    ";
+        return "index/regist";
     }
 }
