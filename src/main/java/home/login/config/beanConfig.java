@@ -30,7 +30,7 @@ public class beanConfig{
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setMapperLocations(new ClassPathResource("sql/*.xml"));
+        factoryBean.setMapperLocations(new ClassPathResource("sql/test.xml"));
         return factoryBean.getObject();
     }
         

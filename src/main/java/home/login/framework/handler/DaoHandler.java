@@ -10,4 +10,11 @@ public class DaoHandler {
         this.dao = dao;
     }
 
+    // private void putUser(){
+    //     dao.putUser();
+    // }
+
+    // private boolean getUser(){
+           
+    // }
 }

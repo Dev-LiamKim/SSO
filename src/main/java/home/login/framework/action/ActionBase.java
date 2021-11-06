@@ -13,6 +13,10 @@ public class ActionBase {
     @Autowired
     @Qualifier("LoginDao")
     public void setDaoHandler(userDao Dao){
-        this.daoHandler = new DaoHandler(Dao);
+        daoHandler = new DaoHandler(Dao);
     }
+
+    // public boolean putUser(){
+        
+    // }
 }
