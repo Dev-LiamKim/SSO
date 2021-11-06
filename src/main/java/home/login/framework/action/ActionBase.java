@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import home.login.framework.handler.DaoHandler;
-import home.login.app.login.dao.LoginDao;
+import home.login.app.login.dao.userDao;
 
 public class ActionBase {
 
@@ -12,10 +12,7 @@ public class ActionBase {
     
     @Autowired
     @Qualifier("LoginDao")
-    public void setDaoHandler(LoginDao Dao){
-        daoHandler = new DaoHandler(Dao);
+    public void setDaoHandler(userDao Dao){
+        this.daoHandler = new DaoHandler(Dao);
     }
-
-    
-
 }

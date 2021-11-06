@@ -11,7 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import home.login.config.bean.DBCP2;
-import home.login.app.login.dao.LoginDao;
+import home.login.app.login.dao.userDao;
 
 
 @Configuration
@@ -30,7 +30,7 @@ public class beanConfig{
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setMapperLocations(new ClassPathResource("sql/test.xml"));
+        factoryBean.setMapperLocations(new ClassPathResource("sql/*.xml"));
         return factoryBean.getObject();
     }
         
@@ -41,8 +41,8 @@ public class beanConfig{
 
 
     @Bean(name = "LoginDao")
-    public LoginDao setLoginDao() throws Exception{
-        LoginDao tempDao = new LoginDao();
+    public userDao setLoginDao() throws Exception{
+        userDao tempDao = new userDao();
         tempDao.setSqlSession(sqlSession());
         return tempDao;
     }

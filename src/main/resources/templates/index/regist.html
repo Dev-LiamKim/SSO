@@ -1,34 +1,74 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link href="/static/css/main/registForm.css" rel="stylesheet">
-    </head>
-    <body>
-        <form action="#">
-            <div id="registForm" class="roundAction">
-                <label for="id">input your Id
-                    <br />
-                    <input name="id">
-                    <br />
-                </label>
-                <label for="passwd">input your passwd
-                    <br />
-                    <input name="passwd" />
-                    <br />
-                </label>
-                <label for="sex">input your gender
-                    <br />
-                    <input name="sex" />
-                    <br />
-                </label>
-                <label for="birthDay">input your birthDay
-                    <br />
-                    <input name="birthDay" />
-                    <br />
-                </label>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="/SSO/static/css/main/registForm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="mainLogo">
+            <span>SSO</span>
+        </div>
+        <form action="/SSO/user/regist" method="POST">
+            <div id="registForm" class="roundBorder">
+                <div class="formItem">
+                    <label for="id">ID
+                        <br />
+                        <input type="text" name="id" placeholder="Id">
+                        <br />
+                        <p class="warn">이미 사용중인 id 입니다.</p>
+                    </label>
+                </div>
+                <div class="formItem">
+                    <label for="nickName">닉네임
+                        <br />
+                        <input type="text" name="nickName" placeholder="닉네임"/>
+                        <br />
+                        <p class="warn">이미 사용중인 닉네임 입니다.</p>
+                    </label>
+                </div>
+                <div class="formItem">
+                    <label for="passwd">비밀번호
+                        <br />
+                        <input type="password" name="passWd" placeholder="비밀번호"/>
+                        <br />
+                        <p class="warn">비밀번호 형식에 맞지않습니다.</p>
+                    </label>
+                </div>
+                <div class="formItem">
+                    <label for="passwdRe">비밀번호 재입력
+                        <br />
+                        <input type="password" name="passwdRe" placeholder="비밀번호를 다시 입력하십시오"/>
+                        <br />
+                        <p class="warn">비밀번호가 일치하지 않습니다.</p>
+                    </label>
+                </div>
+                <div class="formItem">
+                    <div>
+                        성별
+                    </div>
+                    <div>
+                        <input type="radio" id="Male" name="sex" value="M" checked>
+                        <label for="Male">남성</label>
+                        <input type="radio" id="Female" name="sex" value="F">
+                        <label for="Female">여성</label>
+                    </div>
+                </div>
+                <div class="formItem">
+                    <label for="email">이메일
+                        <br />
+                        <input type="text" name="email" />
+                        <br />
+                        <p class="warn">이메일 형식에 맞지 않습니다.</p>
+                    </label>
+                </div>
+                <input type="submit" class="button button4 registButton" />
             </div>
-            
         </form>
-    </body>
+        <script type="text/javascript" src="/SSO/static/js/regist.js"></script>
+    </div>
+</body>
+
 </html>

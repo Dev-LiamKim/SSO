@@ -1,17 +1,13 @@
 package home.login.framework.handler;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import home.login.app.login.dao.LoginDao;
+import home.login.app.login.dao.userDao;
 
 public class DaoHandler {
 
-    private LoginDao dao;
+    private userDao dao;
 
-    public DaoHandler(LoginDao dao){
+    public DaoHandler(userDao dao){
         this.dao = dao;
     }
-
-    
 
 }

@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/SSO/static/css/main/mainPage.css">
+        <script type="text/javascript" src="/SSO/static/js/common.js"></script>
     </head>
     <body>
-        <h1>SSO Project</h1>
-        <ul>
-            <li><a href="/SSO/index/loginForm">login</a></li>
-            <li><a href="/SSO/index/registForm">register</a></li>
-        </ul>
+        <header>
+            <!-- <div id="mainLogo" class="crop">
+                            <img src="/SSO/static/img/logo.png"/>
+                        </div>   -->
+            <div id="mainLogo">
+                SSO
+            </div>
+        </header>
+        <main>
+            <div class="flex-row">
+                <div class="item-main">
+                    as
+                </div>
+                <div class="item-rightSide">
+                    <button type="button" id="loginButton" class="button button5">로그인</button>
+                    <button type="button" id="registButton" onclick='goUrl("/SSO/index/registForm")' class="button button5">회원가입</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div></div>
+        </footer>
+        <script type="text/javascript" src="/SSO/static/js/main.js"></script>
     </body>
 </html>
+

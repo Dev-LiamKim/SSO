@@ -1,0 +1,70 @@
+@charset "utf-8";
+@import url('/SSO/static/css/style/style-button.css');
+@import url('/SSO/static/css/style/font.css');
+
+
+
+#mainLogo {
+    width: 200px;
+    color: black;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#mainLogo span{
+    font-family: 'Roboto-black';
+    display: inline-block;
+    font-size: 120px;
+    line-height: 100px;
+    width: 230px;
+    cursor: pointer;
+}
+
+
+#registForm {
+    position: relative;
+    padding: 30px;
+    width: 350px;
+}
+
+
+#registForm div input{
+    height: 25px;
+    border-radius: 5px;
+}
+
+.wrapper {
+    width: 362px;
+    height: 500px;
+    margin: auto;
+}
+
+.roundBorder {
+    border-radius: 60px;
+    border: black 1px solid;
+}
+
+#registForm .formItem {
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 90px;
+}
+
+#registForm .registButton{
+    position: relative;
+    left: 200px;    
+    width: 100px;
+}
+
+#registForm p.warn {
+    color: red;
+    font-size: 11px;
+    margin-top: 0px;
+    visibility: hidden;
+}
+
+#registForm input[type="text"], #registForm input[type="password"]  {
+    width: 250px;
+}
