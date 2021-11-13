@@ -8,14 +8,13 @@ import home.login.app.login.dao.userDao;
 
 public class ActionBase {
 
-    private DaoHandler daoHandler;
+    protected DaoHandler daoHandler = null;
     
     @Autowired
-    @Qualifier("LoginDao")
+    @Qualifier("userDao")
     public void setDaoHandler(userDao Dao){
         daoHandler = new DaoHandler(Dao);
     }
-
     // public boolean putUser(){
         
     // }

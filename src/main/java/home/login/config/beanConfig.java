@@ -30,7 +30,7 @@ public class beanConfig{
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setMapperLocations(new ClassPathResource("sql/test.xml"));
+        factoryBean.setMapperLocations(new ClassPathResource("sql/login.xml"));
         return factoryBean.getObject();
     }
         
@@ -40,8 +40,8 @@ public class beanConfig{
     }
 
 
-    @Bean(name = "LoginDao")
-    public userDao setLoginDao() throws Exception{
+    @Bean(name = "userDao")
+    public userDao setUserDao() throws Exception{
         userDao tempDao = new userDao();
         tempDao.setSqlSession(sqlSession());
         return tempDao;
