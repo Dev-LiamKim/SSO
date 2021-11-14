@@ -4,8 +4,25 @@
     <select id="getIdId" resultType="java.lang.String" parameterType="java.lang.String">
         select 'T'
             from user_t
-                where 1=1
-                and id = #{id};
+                where id = #{id};
+    </select>
+    <select id="getOverlapedComponent" resultType="java.lang.String" parameterType="java.util.Map">
+        select 'T'
+            from user_t
+                <choose>
+                    <when test="id != null">
+                        where id = #{id};
+                    </when>
+                    <when test="nickname != null">
+                        where id = #{nickName};
+                    </when>
+                    <when test="email != null">
+                        where id = #{email};
+                    </when>
+                    <otherwise>
+                        where false;
+                    </otherwise>
+                </choose>
     </select>
     <insert id="regist" parameterType="java.util.Map">
         insert into user_t values(#{id}, #{nickName}, #{birthDay}, now(), #{sex}, nextval('sso_id_seq'), #{email})

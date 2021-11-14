@@ -33,4 +33,10 @@ public class DaoHandler {
             return false;
         return true;
     }
+
+    public Boolean isInputOverlaped(Map<String, String> input){
+        if(dao.getOverlapedComponent(input) == null)
+            return false;
+        return true;
+    }
 }

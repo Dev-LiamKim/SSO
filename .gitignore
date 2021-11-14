@@ -1,7 +1,12 @@
-###
-*
-###
-!README.md
-!src
-!build.gradle
-!.gitignore
+### java project default ignore
+bin
+build
+
+### vscode default ignore
+.gradle
+.vscode
+temp
+
+### important source
+*.sql
+*.properties
