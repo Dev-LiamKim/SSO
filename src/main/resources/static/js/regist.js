@@ -18,46 +18,63 @@ function init(){
     passWdReInput.addEventListener('focusout', passWdReValidateCheck);
 
 
-    idInput.regExp = /^[a-z]+[a-z0-9]{8,20}$/;
+    idInput.regExp = /^[a-zA-Z]+([0-9|[a-z]){8,20}$/;
     idInput.alreadyUsedMessage = '이미 사용중인 ID입니다.';
     idInput.notYetUsedMessage = '사용 가능한 ID입니다.';
     idInput.wrongFormatMessage = 'ID는 영문자 와 숫자조합으로 8자에서 20자 사이만 가능합니다.';
+    idInput.state = false;
 
-    nickNameInput.regExp = /^[a-z0-9]{8,20}$/;
+    nickNameInput.regExp = /^[a-zA-Z0-9!@#$%^&*()_+-=]{4,20}$/;
     nickNameInput.alreadyUsedMessage = '이미 사용중인 닉네임 입니다.';
     nickNameInput.notYetUsedMessage = '사용 가능한 닉네임 입니다.';
     nickNameInput.wrongFormatMessage = '닉네임은 영문자 또는 숫자 또는 영문자 숫자조합으로 8자에서 20자 사이만 가능합니다.';
+    nickNameInput.state = false;
 
     eMailInput.regExp = /^[0-9a-zA-Z-_]+@[0-9a-zA-Z]+\.+[a-zA-Z]{2,3}$/;
     eMailInput.alreadyUsedMessage = '이미 사용중인 이메일입니다.';
     eMailInput.notYetUsedMessage = '사용 가능한 이메일입니다.';
     eMailInput.wrongFormatMessage = '이메일 형식에 맞지않습니다.';
+    eMailInput.state = false;
     
     passWdInput.regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
     passWdInput.wrongFormatMessage = '비밀번호는 영문 대/소 문자 및 숫자 특수문자 조합으로 8자에서 20자 사이만 가능합니다.';
     passWdInput.avilablePassWdMessage = '사용가능한 비밀번호 입니다.';
+    passWdInput.state = false;
 
     passWdReInput.inputDoesNotMatchMessage = '비밀번호가 일치하지 않습니다.';
     passWdReInput.inputMatchMessage = '비밀번호가 일치합니다.';
+    passWdReInput.state = false;
 }
 
+
+function forSubmit(){
+    id
+
+    return true;
+}
+
+
+//비밀번호 재입력 일치 여부 
 function passWdReValidateCheck(){
     let passWdReInputWarn = document.querySelector('label[for="passWdRe"] p');
     let passWdInput = document.querySelector('input[name="passWd"]')
-    if(this.value == ''){
+    let passWdReInput = document.querySelector('input[name="passWdRe"]')
+    if (passWdReInput.value == ''){
         passWdReInputWarn.style.visibility = 'hidden';
-    } else if(this.value == passWdInput.value){
+    } else if (passWdReInput.value == passWdInput.value){
         passWdReInputWarn.style.color = 'green';
-        passWdReInputWarn.textContent = this.inputMatchMessage;
+        passWdReInputWarn.textContent = passWdReInput.inputMatchMessage;
         passWdReInputWarn.style.visibility = 'visible';
     } else{
         passWdReInputWarn.style.color = 'red';
-        passWdReInputWarn.textContent = this.inputDoesNotMatchMessage;
+        passWdReInputWarn.textContent = passWdReInput.inputDoesNotMatchMessage;
         passWdReInputWarn.style.visibility = 'visible';
     }
     
 }
 
+
+//비밀번호 형식 유효성 검사
 function passWdValidateCheck(){
     let passWdInputWarn = document.querySelector('label[for="passWd"] p');
     if(this.value == ''){
@@ -74,6 +91,7 @@ function passWdValidateCheck(){
         passWdInputWarn.textContent = this.avilablePassWdMessage;
         passWdInputWarn.style.visibility = 'visible';
     }
+    passWdReValidateCheck();
 }
 
 //입력 유효성 검사

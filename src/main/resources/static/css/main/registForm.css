@@ -23,14 +23,14 @@
 }
 
 
-#registForm {
+#registBorder {
     position: relative;
     padding: 30px;
     width: 350px;
 }
 
 
-#registForm div input{
+#registBorder div input{
     height: 25px;
     border-radius: 5px;
 }
@@ -46,25 +46,25 @@
     border: black 1px solid;
 }
 
-#registForm .formItem {
+#registBorder .formItem {
     margin-left: 50px;
     margin-right: 50px;
     height: 90px;
 }
 
-#registForm .registButton{
+#registBorder .registButton{
     position: relative;
     left: 200px;    
     width: 100px;
 }
 
-#registForm p.warn {
+#registBorder p.warn {
     color: red;
     font-size: 11px;
     margin-top: 0px;
     visibility: hidden;
 }
 
-#registForm input[type="text"], #registForm input[type="password"]  {
+#registBorder input[type="text"], #registBorder input[type="password"]  {
     width: 250px;
 }
