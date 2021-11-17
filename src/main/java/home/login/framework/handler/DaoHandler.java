@@ -3,6 +3,7 @@ package home.login.framework.handler;
 import home.login.app.login.dao.userDao;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collections;
 
 public class DaoHandler {
 
@@ -34,8 +35,8 @@ public class DaoHandler {
         return true;
     }
 
-    public Boolean isInputOverlaped(Map<String, String> input){
-        if(dao.getOverlapedComponent(input) == null)
+    public Boolean isInputOverlaped(String inputName, String inputValue){
+        if(dao.getOverlapedComponent(Collections.singletonMap(inputName, inputValue)) == null)
             return false;
         return true;
     }

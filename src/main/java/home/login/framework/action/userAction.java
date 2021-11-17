@@ -53,8 +53,6 @@ public class userAction extends ActionBase {
     @PostMapping("/inputOverlapCheck")
     public String overlapCheck(@RequestParam(value = "inputName") String inputName,
             @RequestParam(value = "inputValue") String inputValue) {
-
-        return daoHandler.isInputOverlaped(
-            (HashMap<String, String>) Collections.singletonMap(inputName, inputValue)).toString();
+        return  "" + inputName + ":" + daoHandler.isInputOverlaped(inputName, inputValue);
     }
 }

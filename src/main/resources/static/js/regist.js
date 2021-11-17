@@ -1,5 +1,123 @@
-//페이지 로딩시 이벤트 등록
-document.querySelector('input[name="id"]').addEventListener('focusout', idValidationCheck);
+//페이지 로딩완료 이벤트
+document.addEventListener('DOMContentLoaded', function(){
+    init(); 
+})
+
+
+function init(){    
+    let idInput = document.querySelector('input[name="id"]');
+    let nickNameInput = document.querySelector('input[name="nickName"]');
+    let eMailInput = document.querySelector('input[name="email"]');
+    let passWdInput = document.querySelector('input[name="passWd"]');
+    let passWdReInput = document.querySelector('input[name="passWdRe"]');
+
+    idInput.addEventListener('focusout', inputValidateCheck);
+    nickNameInput.addEventListener('focusout', inputValidateCheck);
+    eMailInput.addEventListener('focusout', inputValidateCheck);
+    passWdInput.addEventListener('focusout', passWdValidateCheck);
+    passWdReInput.addEventListener('focusout', passWdReValidateCheck);
+
+
+    idInput.regExp = /^[a-z]+[a-z0-9]{8,20}$/;
+    idInput.alreadyUsedMessage = '이미 사용중인 ID입니다.';
+    idInput.notYetUsedMessage = '사용 가능한 ID입니다.';
+    idInput.wrongFormatMessage = 'ID는 영문자 와 숫자조합으로 8자에서 20자 사이만 가능합니다.';
+
+    nickNameInput.regExp = /^[a-z0-9]{8,20}$/;
+    nickNameInput.alreadyUsedMessage = '이미 사용중인 닉네임 입니다.';
+    nickNameInput.notYetUsedMessage = '사용 가능한 닉네임 입니다.';
+    nickNameInput.wrongFormatMessage = '닉네임은 영문자 또는 숫자 또는 영문자 숫자조합으로 8자에서 20자 사이만 가능합니다.';
+
+    eMailInput.regExp = /^[0-9a-zA-Z-_]+@[0-9a-zA-Z]+\.+[a-zA-Z]{2,3}$/;
+    eMailInput.alreadyUsedMessage = '이미 사용중인 이메일입니다.';
+    eMailInput.notYetUsedMessage = '사용 가능한 이메일입니다.';
+    eMailInput.wrongFormatMessage = '이메일 형식에 맞지않습니다.';
+    
+    passWdInput.regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    passWdInput.wrongFormatMessage = '비밀번호는 영문 대/소 문자 및 숫자 특수문자 조합으로 8자에서 20자 사이만 가능합니다.';
+    passWdInput.avilablePassWdMessage = '사용가능한 비밀번호 입니다.';
+
+    passWdReInput.inputDoesNotMatchMessage = '비밀번호가 일치하지 않습니다.';
+    passWdReInput.inputMatchMessage = '비밀번호가 일치합니다.';
+}
+
+function passWdReValidateCheck(){
+    let passWdReInputWarn = document.querySelector('label[for="passWdRe"] p');
+    let passWdInput = document.querySelector('input[name="passWd"]')
+    if(this.value == ''){
+        passWdReInputWarn.style.visibility = 'hidden';
+    } else if(this.value == passWdInput.value){
+        passWdReInputWarn.style.color = 'green';
+        passWdReInputWarn.textContent = this.inputMatchMessage;
+        passWdReInputWarn.style.visibility = 'visible';
+    } else{
+        passWdReInputWarn.style.color = 'red';
+        passWdReInputWarn.textContent = this.inputDoesNotMatchMessage;
+        passWdReInputWarn.style.visibility = 'visible';
+    }
+    
+}
+
+function passWdValidateCheck(){
+    let passWdInputWarn = document.querySelector('label[for="passWd"] p');
+    if(this.value == ''){
+        console.log('1');
+        passWdInputWarn.style.visibility = 'hidden';
+    } else if(!this.regExp.test(this.value)){
+        console.log('2');
+        passWdInputWarn.style.color = 'red';
+        passWdInputWarn.textContent = this.wrongFormatMessage;
+        passWdInputWarn.style.visibility = 'visible';
+    } else{
+        console.log('3');
+        passWdInputWarn.style.color = 'green';
+        passWdInputWarn.textContent = this.avilablePassWdMessage;
+        passWdInputWarn.style.visibility = 'visible';
+    }
+}
+
+//입력 유효성 검사
+function inputValidateCheck() {
+    if (this.regExp.test(this.value)) {
+        isInputOverlaped(this);
+    } else if (!(this.value == '')) {
+        document.querySelector(`label[for="${this.name}"] p`).style.visibility = 'visible';
+        document.querySelector(`label[for="${this.name}"] p`).style.color = 'red';
+        document.querySelector(`label[for="${this.name}"] p`).textContent = this.wrongFormatMessage;
+    } else {
+        document.querySelector(`label[for="${this.name}"] p`).style.visibility = 'hidden';
+    }
+}
+
+//입력 중복 검사
+function isInputOverlaped(inputObj) {
+    let params = 'inputName=' + encodeURIComponent(inputObj.name);
+    params += '&inputValue=' + encodeURIComponent(inputObj.value)
+    let url = '/SSO/user/inputOverlapCheck';
+    makePostRequest(url, params, true, inputWarnVisibilityJudge);
+}
+
+function inputWarnVisibilityJudge(){
+    if (this.readyState === XMLHttpRequest.DONE) {
+
+        let inputObj = document.getElementsByName(this.response.split(':')[0])[0];
+        let inputOverlapCheckResult = this.response.split(':')[1];
+        let warnLabel = document.querySelector(`label[for="${inputObj.name}"] p`)
+
+        if (inputOverlapCheckResult == 'true') {
+            warnLabel.textContent = inputObj.alreadyUsedMessage;
+            warnLabel.style.color = 'red';
+            warnLabel.style.visibility = 'visible';
+        } else if (inputOverlapCheckResult == 'false') {
+            warnLabel.textContent = inputObj.notYetUsedMessage;
+            warnLabel.style.color = 'green';
+            warnLabel.style.visibility = 'visible';
+        }
+    }
+}
+
+
+
 
 
 //id 유효성 검사
