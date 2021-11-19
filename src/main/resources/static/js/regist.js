@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', function(){
     init(); 
 })
 
+function test(x, n){
+    let x = prompt('x를 입력하십시오.');
+    let n = prompt('n을 입력하십시오.');
+    let re = pow(x,n);
+    if(re){
+        return re;
+    }else if(n<1){
+        alert('n은 1이상의 자연수를 입력하셔야 합니다.');
+    }else{
+        alert('x 또는 n을 잘못입력하셨습니다.');
+    }
+}
+
 
 function init(){    
     let idInput = document.querySelector('input[name="id"]');
