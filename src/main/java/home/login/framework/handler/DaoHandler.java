@@ -1,9 +1,11 @@
 package home.login.framework.handler;
 
-import home.login.app.login.dao.userDao;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
+
+import home.login.app.login.dao.userDao;
+import home.login.app.login.vo.userVo;
 
 public class DaoHandler {
 
@@ -13,15 +15,8 @@ public class DaoHandler {
         this.dao = dao;
     }
 
-    public void putUser(String id, String nickName, String passWd, String sex, String email, String birthDay){
-        Map<String,String> newUser = new HashMap<String, String>();
-        newUser.put("id", id);
-        newUser.put("nickName", nickName);
-        newUser.put("birthDay", birthDay);
-        newUser.put("passWd", passWd);
-        newUser.put("sex", sex);
-        newUser.put("email", email);
-        if(isIdOverlaped(id)){
+    public void putUser(userVo newUser){
+        if(isIdOverlaped(newUser.getId())){
             System.out.println("Same Id already Exist");
             return;
         }

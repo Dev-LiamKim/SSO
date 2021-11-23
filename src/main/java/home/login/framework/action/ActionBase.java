@@ -1,5 +1,7 @@
 package home.login.framework.action;
 
+import java.util.regex.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -19,4 +21,8 @@ public class ActionBase {
 
         
     // }
+
+    public boolean registFormDataCheck(){
+        return false;
+    }
 }

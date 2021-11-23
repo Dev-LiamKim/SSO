@@ -2,7 +2,6 @@ package home.login.framework.action;
 
 
 import java.util.Map;
-import java.util.Collections;
 import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import home.login.app.login.vo.userVo;
 
 @RestController
 @RequestMapping("/user")
@@ -33,6 +32,7 @@ public class userAction extends ActionBase {
         return members;
     }
 
+    /* 
     @PostMapping("/regist")
     public Map<String, String> regist(@RequestParam(value = "id")String id
                 ,@RequestParam(value = "nickName")String nickName
@@ -43,6 +43,13 @@ public class userAction extends ActionBase {
         Map<String, String> map = new HashMap<String, String>();
         daoHandler.putUser(id, nickName, passWd, sex, email, birthDay);
         return map;
+    } */
+
+    @PostMapping("/regist")
+    public String regist(userVo newUser) {
+        String result = "false";
+        daoHandler.putUser(newUser);
+        return result;
     }
 
     @PostMapping("/idOverlapCheck")

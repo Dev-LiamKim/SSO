@@ -1,19 +1,16 @@
 //페이지 로딩완료 이벤트
+let registForm;
+
 document.addEventListener('DOMContentLoaded', function(){
     init(); 
+    registForm =  document.getElementById('registForm');
+    registForm.addEventListener('submit', registFormSubmit)
+    document.addEventListener('keypress', catchKeyPress);
 })
 
-function test(x, n){
-    let x = prompt('x를 입력하십시오.');
-    let n = prompt('n을 입력하십시오.');
-    let re = pow(x,n);
-    if(re){
-        return re;
-    }else if(n<1){
-        alert('n은 1이상의 자연수를 입력하셔야 합니다.');
-    }else{
-        alert('x 또는 n을 잘못입력하셨습니다.');
-    }
+function catchKeyPress(e){
+    if(e.keyCode == 13)
+        registForm.submit();
 }
 
 
@@ -23,13 +20,14 @@ function init(){
     let eMailInput = document.querySelector('input[name="email"]');
     let passWdInput = document.querySelector('input[name="passWd"]');
     let passWdReInput = document.querySelector('input[name="passWdRe"]');
+    let birthDayInput = document.querySelector('input[name=birthDay]');
 
     idInput.addEventListener('focusout', inputValidateCheck);
     nickNameInput.addEventListener('focusout', inputValidateCheck);
     eMailInput.addEventListener('focusout', inputValidateCheck);
     passWdInput.addEventListener('focusout', passWdValidateCheck);
     passWdReInput.addEventListener('focusout', passWdReValidateCheck);
-
+    birthDayInput.addEventListener('change', function () { this.state = this.value != '' ? true : false; });
 
     idInput.regExp = /^[a-zA-Z]+([0-9|[a-z]){8,20}$/;
     idInput.alreadyUsedMessage = '이미 사용중인 ID입니다.';
@@ -57,13 +55,43 @@ function init(){
     passWdReInput.inputDoesNotMatchMessage = '비밀번호가 일치하지 않습니다.';
     passWdReInput.inputMatchMessage = '비밀번호가 일치합니다.';
     passWdReInput.state = false;
+
+    birthDayInput.state = false;
 }
 
 
-function forSubmit(){
-    id
+function registFormSubmit(){
+    if (!document.querySelector('input[name="id"]').state){
+        alert('id가 제대로 입력되지 않았습니다.');
+        return;
+    }
 
-    return true;
+    if (!document.querySelector('input[name="nickName"]').state) {
+        alert('닉네임이 제대로 입력되지 않았습니다.');
+        return;
+    }
+
+    if (!document.querySelector('input[name="email"]').state) {
+        alert('이메일이 제대로 입력되지 않았습니다.');
+        return;
+    }
+
+    if (!document.querySelector('input[name="passWd"]').state || !document.querySelector('input[name="passWdRe"]').state) {
+        alert('비밀번호가 제대로 입력되지 않았습니다.');
+        return;
+    }
+
+    if(!document.querySelector('input[name="passWd"]').state){
+        alert('생일을 설정하지 않았습니다.');
+        return;
+    }
+
+    if (document.querySelectorAll('input[name="sex"]')[0].checked || document.querySelectorAll('input[name="sex"]')[1].checked){
+        alert('성별이 제대로 설정되지 않앗습니다.');
+        return;
+    }
+    registForm.submit();
+    
 }
 
 
@@ -74,14 +102,17 @@ function passWdReValidateCheck(){
     let passWdReInput = document.querySelector('input[name="passWdRe"]')
     if (passWdReInput.value == ''){
         passWdReInputWarn.style.visibility = 'hidden';
+        passWdReInput.state = false;
     } else if (passWdReInput.value == passWdInput.value){
         passWdReInputWarn.style.color = 'green';
         passWdReInputWarn.textContent = passWdReInput.inputMatchMessage;
         passWdReInputWarn.style.visibility = 'visible';
+        passWdReInput.state = true;
     } else{
         passWdReInputWarn.style.color = 'red';
         passWdReInputWarn.textContent = passWdReInput.inputDoesNotMatchMessage;
         passWdReInputWarn.style.visibility = 'visible';
+        passWdReInput.state = false;
     }
     
 }
@@ -91,18 +122,18 @@ function passWdReValidateCheck(){
 function passWdValidateCheck(){
     let passWdInputWarn = document.querySelector('label[for="passWd"] p');
     if(this.value == ''){
-        console.log('1');
         passWdInputWarn.style.visibility = 'hidden';
+        this.state = false;
     } else if(!this.regExp.test(this.value)){
-        console.log('2');
         passWdInputWarn.style.color = 'red';
         passWdInputWarn.textContent = this.wrongFormatMessage;
         passWdInputWarn.style.visibility = 'visible';
+        this.state = false;
     } else{
-        console.log('3');
         passWdInputWarn.style.color = 'green';
         passWdInputWarn.textContent = this.avilablePassWdMessage;
         passWdInputWarn.style.visibility = 'visible';
+        this.state = true;
     }
     passWdReValidateCheck();
 }
@@ -111,12 +142,14 @@ function passWdValidateCheck(){
 function inputValidateCheck() {
     if (this.regExp.test(this.value)) {
         isInputOverlaped(this);
-    } else if (!(this.value == '')) {
+    } else if (this.value != '') {
         document.querySelector(`label[for="${this.name}"] p`).style.visibility = 'visible';
         document.querySelector(`label[for="${this.name}"] p`).style.color = 'red';
         document.querySelector(`label[for="${this.name}"] p`).textContent = this.wrongFormatMessage;
+        this.state = false;
     } else {
         document.querySelector(`label[for="${this.name}"] p`).style.visibility = 'hidden';
+        this.state = false;
     }
 }
 
@@ -139,10 +172,12 @@ function inputWarnVisibilityJudge(){
             warnLabel.textContent = inputObj.alreadyUsedMessage;
             warnLabel.style.color = 'red';
             warnLabel.style.visibility = 'visible';
+            inputObj.state = false;
         } else if (inputOverlapCheckResult == 'false') {
             warnLabel.textContent = inputObj.notYetUsedMessage;
             warnLabel.style.color = 'green';
             warnLabel.style.visibility = 'visible';
+            inputObj.state = true;
         }
     }
 }

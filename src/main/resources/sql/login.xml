@@ -24,7 +24,7 @@
                     </otherwise>
                 </choose>
     </select>
-    <insert id="regist" parameterType="java.util.Map">
+    <insert id="regist" parameterType="home.login.app.login.vo.userVo">
         insert into user_t values(#{id}, #{nickName}, #{birthDay}, now(), #{sex}, nextval('sso_id_seq'), #{email})
     </insert>
 </mapper>
