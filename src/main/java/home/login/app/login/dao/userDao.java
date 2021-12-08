@@ -18,8 +18,10 @@ public class userDao{
         return sqlSession.selectOne("login.getIdId", id);
     }
 
-    public int putUser(userVo newUser){
-        return sqlSession.insert("login.regist", newUser);
+    public Boolean putUser(userVo newUser){
+        if(sqlSession.insert("login.regist", newUser)>0)
+            return true;
+        return false;
     }
 
     public String getOverlapedComponent(Map<String, String> input) {

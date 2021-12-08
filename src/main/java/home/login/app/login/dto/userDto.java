@@ -1,6 +1,5 @@
 package home.login.app.login.dto;
 
-import lombok.*;
 import java.time.LocalDateTime;
 
 public class userDto {

@@ -1,3 +1,6 @@
+### spring mvc default ignore
+/static
+
 ### java project default ignore
 bin
 build

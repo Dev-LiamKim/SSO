@@ -6,7 +6,7 @@
             from user_t
                 where id = #{id};
     </select>
-    <select id="getOverlapedComponent" resultType="java.lang.String" parameterType="java.util.Map">
+    <select id="getOverlapedComponent" resultType="java.lang.String" parameterType="java.util.HashMap">
         select 'T'
             from user_t
                 <choose>

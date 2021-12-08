@@ -29,7 +29,7 @@ function init(){
     passWdReInput.addEventListener('focusout', passWdReValidateCheck);
     birthDayInput.addEventListener('change', function () { this.state = this.value != '' ? true : false; });
 
-    idInput.regExp = /^[a-zA-Z]+([0-9|[a-z]){8,20}$/;
+    idInput.regExp = /^[a-zA-Z]+([0-9|[a-z]){8,20}$/;   
     idInput.alreadyUsedMessage = '이미 사용중인 ID입니다.';
     idInput.notYetUsedMessage = '사용 가능한 ID입니다.';
     idInput.wrongFormatMessage = 'ID는 영문자 와 숫자조합으로 8자에서 20자 사이만 가능합니다.';
@@ -86,7 +86,7 @@ function registFormSubmit(){
         return;
     }
 
-    if (document.querySelectorAll('input[name="sex"]')[0].checked || document.querySelectorAll('input[name="sex"]')[1].checked){
+    if (!document.querySelectorAll('input[name="sex"]')[0].checked && !document.querySelectorAll('input[name="sex"]')[1].checked){
         alert('성별이 제대로 설정되지 않앗습니다.');
         return;
     }
@@ -114,7 +114,6 @@ function passWdReValidateCheck(){
         passWdReInputWarn.style.visibility = 'visible';
         passWdReInput.state = false;
     }
-    
 }
 
 
